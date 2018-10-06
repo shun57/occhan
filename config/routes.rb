@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'problems#index'
   resources :problems
   devise_for :users
   mount LetterOpenerWeb::Engine, at: "/letter_opener"
