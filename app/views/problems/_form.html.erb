@@ -12,6 +12,9 @@
   <% end %>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= bootstrap_form_for(@user) do |f| %>
+    <%= f.email_field :email %>
+    <%= f.password_field :password %>
+    <%= f.submit %>
   </div>
 <% end %>
