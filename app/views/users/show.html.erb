@@ -1,0 +1,9 @@
+<% provide(:title, @user.name) %>
+<h1>My page (<%= @user.name %>)</h1>
+<p>プロフィール画像：</p>
+<%= image_tag("#{@user.icon}") %>
+<p>アドレス (<%= @user.email %>)</p>
+<p>プロフィール (<%= @user.profile %>)</p>
+<p>役割 (<%= @user.role %>)</p>
+<p>居住地 (<%= @user.prefecture_code %>)</p>
+<%= link_to 'マイページを編集する', edit_user_registration_path(@user.id) %>
