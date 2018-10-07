@@ -70,6 +70,6 @@ class ProblemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def problem_params
-      params.fetch(:problem, {})
+      params.fetch(:problem, {}).permit(:title,:content,:return)
     end
 end
