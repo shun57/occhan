@@ -1,10 +1,10 @@
-<%= form_with(model: problem, local: true) do |form| %>
-  <% if problem.errors.any? %>
+<%= bootstrap_form_for(@problem) do |f| %>
+  <% if @problem.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(problem.errors.count, "error") %> prohibited this problem from being saved:</h2>
+      <h2><%= pluralize(@problem.errors.count, "error") %> prohibited this problem from being saved:</h2>
 
       <ul>
-      <% problem.errors.full_messages.each do |message| %>
+      <% @problem.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -12,11 +12,9 @@
   <% end %>
 
   <div class="actions">
-    <%= bootstrap_form_for(@problem) do |f| %>
     <%= f.text_field :title %>
     <%= f.text_field :return %>
     <%= f.text_field :content %>
     <%= f.submit %>
-    <% end %>
   </div>
 <% end %>

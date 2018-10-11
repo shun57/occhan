@@ -11,6 +11,7 @@ class ProblemsController < ApplicationController
   # GET /problems/1
   # GET /problems/1.json
   def show
+    @request = current_user.request_managements.find_by(problem_id: @problem.id)
   end
 
   # GET /problems/new
@@ -26,6 +27,7 @@ class ProblemsController < ApplicationController
   # POST /problems.json
   def create
     @problem = Problem.new(problem_params)
+    @problem.user_id = current_user.id
 
     respond_to do |format|
       if @problem.save

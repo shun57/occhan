@@ -1,9 +1,22 @@
 <% provide(:title, @user.name) %>
 <h1>My page (<%= @user.name %>)</h1>
-<p>プロフィール画像：</p>
+<p>アイコン：</p>
 <%= image_tag("#{@user.icon}") %>
 <p>アドレス (<%= @user.email %>)</p>
 <p>プロフィール (<%= @user.profile %>)</p>
 <p>役割 (<%= @user.role %>)</p>
 <p>居住地 (<%= @user.prefecture_code %>)</p>
 <%= link_to 'マイページを編集する', edit_user_registration_path(@user.id) %>
+
+<h2>申請一覧</h2>
+<div class="row">
+<% @request_problems.each do |request_problems| %>
+  <div class="col-xs-12 col-md-6 blog-panel">
+    <h2>タイトル：<%= request_problems.title %></h2>
+    <p>本文：<%= request_problems.content %></p>
+    <p>リターン：<%= request_problems.return %></p>
+    <p>投稿者名：<%= request_problems.user.name %></p>
+    <%= link_to 'メッセージ', conversations_path(sender_id: current_user.id, recipient_id: request_problems.user.id), method: :post%>
+  </div>
+  <% end %>
+</div>

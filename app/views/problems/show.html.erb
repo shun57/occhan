@@ -1,2 +1,27 @@
-<%= link_to 'Edit', edit_problem_path(@problem) %> |
-<%= link_to 'Back', problems_path %>
+<h2>タイトル：<%= @problem.title %></h2>
+<p>本文：<%= @problem.content %></p>
+<p>リターン：<%= @problem.return %></p>
+  <% post_user = @problem.user %>
+<p>投稿者名：<%= post_user.try(:name) %></p>
+
+<% unless @problem.user_id == current_user.id %>
+  <% if @request.present? %>
+    <%= link_to '申請を解除する', request_management_path(id: @request.id), method: :delete, class: 'btn btn-danger' %>
+    <%= link_to 'メッセージ', conversations_path(sender_id: current_user.id, recipient_id: @problem.user.id), method: :post%>
+  <% else %>
+    <%= link_to '申請する', request_managements_path(problem_id: @problem.id), method: :post, class: 'btn btn-primary' %>
+  <% end %>
+<% end %>
+<br>
+<h2>相談者</h2>
+<h3><%= @problem.user.name %></h3>
+<%= image_tag("#{@problem.user.icon}") %>
+<br>
+<p>プロフィール (<%= @problem.user.profile %>)</p>
+<p>役割 (<%= @problem.user.role %>)</p>
+<p>居住地 (<%= @problem.user.prefecture_code %>)</p>
+
+<% if @problem.user_id == current_user.id %>
+  <%= link_to 'Edit', edit_problem_path(@problem) %>
+<% end %>
+  <%= link_to 'Back', problems_path %>
