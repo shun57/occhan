@@ -1,17 +1,20 @@
 class ProblemsController < ApplicationController
   before_action :set_problem, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :show, :edit, :update, :destroy]
 
   # GET /problems
   # GET /problems.json
   def index
     @problems = Problem.all
+    @problems = Problem.page(params[:page]).per(10)
   end
 
   # GET /problems/1
   # GET /problems/1.json
   def show
     @request = current_user.request_managements.find_by(problem_id: @problem.id)
+    @reviews = @problem.reviews
+    @review = @problem.reviews.build
   end
 
   # GET /problems/new

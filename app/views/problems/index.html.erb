@@ -14,5 +14,10 @@
       </tr>
     <% end %>
 <br>
-
-<%= link_to 'New Problem', new_problem_path %>
+<% if current_user %>
+  <% if current_user.role == 'young' %>
+    <%= link_to 'New Problem', new_problem_path %>
+  <% end %>
+<% end %>
+<br>
+<%= paginate @problems %>

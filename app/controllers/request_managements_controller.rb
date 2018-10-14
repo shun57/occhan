@@ -3,6 +3,9 @@ class RequestManagementsController < ApplicationController
   def create
     request = current_user.request_managements.create(problem_id: params[:problem_id])
     redirect_to problems_url, notice: "#{request.problem.user.name}さんの課題#{request.problem.title}に申請しました！"
+    if request.save
+      ApplyMailer.apply_mail(request).deliver
+    end
   end
 
   def destroy

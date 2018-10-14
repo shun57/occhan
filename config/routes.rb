@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root 'problems#index'
-  resources :problems
+  resources :problems do
+    resources :reviews
+  end
   devise_for :users
   resources :users, :only => [:show]
   resources :request_managements, only:[:create, :destroy]
