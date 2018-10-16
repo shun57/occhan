@@ -1,7 +1,10 @@
 <% provide(:title, @user.name) %>
-  <div class="clearfix">
-    <%= link_to '編集する', edit_user_registration_path(@user.id), class:"btn btn-sm btn-secondary profile-edit float-right" %>
-  </div>
+  <% if current_user == @user %>
+    <div class="clearfix">
+      <%= link_to '編集する', edit_user_registration_path(@user.id), class:"btn btn-sm btn-secondary profile-edit float-right" %>
+    </div>
+  <% end %>
+
   <ol class="breadcrumb">
     <li class="breadcrumb-item active" aria-current="page">基本情報</li>
   </ol>
@@ -36,23 +39,21 @@
     <% end %>
   <% end %>
 
-  <% if current_user %>
-    <% if current_user.role == 'occhan' %>
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">申請課題一覧</li>
-      </ol>
-      <div class="row">
-        <% @request_problems.each do |request_problems| %>
-          <div class="col-xs-12 col-md-6 blog-panel">
-            <span class="badge badge-success badge-pill">相談したいこと！</span>
-            <h3><%= request_problems.title %></h3>
-            <p><%= request_problems.content %></p>
-            <p>リターン：<%= request_problems.return %></p>
-            <p>投稿者名：<%= request_problems.user.name %></p>
-            <%= link_to 'メッセージを送る', conversations_path(sender_id: current_user.id, recipient_id: request_problems.user.id), method: :post, class: 'btn btn-info'%>
-            <hr>
-          </div>
-        <% end %>
+  <% if @user.role == 'occhan' %>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active" aria-current="page">申請課題一覧</li>
+    </ol>
+    <div class="row">
+      <% @request_problems.each do |request_problems| %>
+        <div class="col-xs-12 col-md-6 blog-panel">
+          <span class="badge badge-success badge-pill">相談したいこと！</span>
+          <h3><%= request_problems.title %></h3>
+          <p><%= request_problems.content %></p>
+          <p>リターン：<%= request_problems.return %></p>
+          <p>投稿者名：<%= request_problems.user.name %></p>
+          <%= link_to 'メッセージを送る', conversations_path(sender_id: current_user.id, recipient_id: request_problems.user.id), method: :post, class: 'btn btn-info'%>
+          <hr>
+        </div>
       <% end %>
     <% end %>
   </div>
