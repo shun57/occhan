@@ -1,9 +1,8 @@
 # Occhan
-====
-若者がおっちゃんにアドバイスをさせてあげるサービス。
-おっちゃんは、若者の相談を選び、申請。
-おっちゃんにアドバイス許可を与える代わりに、
-若者はリターンをもらう。
+若者がおっちゃんにアドバイスをさせてあげるサービス。  
+おっちゃんは、若者の相談を選び、申請。おっちゃんにアドバイス許可を与える代わりに、若者はリターンをもらう。  
+若者 = 相談作成者  
+おっちゃん = アドバイス申請者
 
 ## Description
 昨今、少子高齢化により若者の数が減り、おっちゃんは増え続ける一方だ。
@@ -16,8 +15,8 @@
 ひいては社会が良くなることを願っている・・・。
 
 ## Demo
-
-↓どうやって使う？
+![若者操作demo](https://user-images.githubusercontent.com/14966140/47023364-86b55680-d19a-11e8-8777-b5b9fe118207.gif)
+![おっちゃん操作demo](https://user-images.githubusercontent.com/14966140/47023464-b2384100-d19a-11e8-931e-54e0edec040c.gif)
 
 ## Requirement
 * ruby 2.5.1
@@ -58,13 +57,12 @@
 11. レビューコメント機能
 若者、おっちゃんのページにレビューをコメントできる
 
-## Usage 使い方
-
 ## DB&カタログ設計
 [カタログ設計&テーブル定義](https://docs.google.com/spreadsheets/d/1ZaUdRmGfjTv4Jqu5hJUQclhnZgqP7ii9hSIUwahTZJA/edit#gid=1415471225)
 
 ## ER
-![ER図](https://github.com/shun57/occhan/issues/1#issue-370625429)
+![ER図](https://user-images.githubusercontent.com/14966140/47021584-b06c7e80-d196-11e8-9460-9908ecc31545.png)
+)
 
 ## 参考サイト
 [Matcher](https://matcher.jp/)
