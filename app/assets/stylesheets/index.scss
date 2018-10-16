@@ -1,16 +1,23 @@
 body {
   background-color: #fff;
   color: #333;
-  margin: 33px;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
+  padding-top: 4.0rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
+  font-size: 16px;
   line-height: 18px;
+}
+
+li {
+  list-style: none;
 }
 
 pre {
@@ -26,10 +33,6 @@ a {
     color: #666;
   }
 
-  &:hover {
-    color: #fff;
-    background-color: #000;
-  }
 }
 
 th {
@@ -81,4 +84,16 @@ div {
 
 label {
   display: block;
+}
+
+.footer {
+  padding: 2.5rem 0;
+  color: #999;
+  text-align: center;
+  background-color: #f9f9f9;
+  border-top: .05rem solid #e5e5e5;
+  margin-top: auto;
+}
+.footer p:last-child {
+  margin-bottom: 0;
 }

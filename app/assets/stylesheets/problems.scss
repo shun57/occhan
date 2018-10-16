@@ -1,3 +1,51 @@
-// Place all the styles related to the problems controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+:root {
+  --jumbotron-padding-y: 3rem;
+}
+
+.jumbotron {
+  padding-top: var(--jumbotron-padding-y);
+  padding-bottom: var(--jumbotron-padding-y);
+}
+
+@media (min-width: 768px) {
+  .jumbotron {
+    padding-top: calc(var(--jumbotron-padding-y) * 2);
+    padding-bottom: calc(var(--jumbotron-padding-y) * 2);
+  }
+}
+
+.jumbotron p:last-child {
+  margin-bottom: 0;
+}
+
+.jumbotron-heading {
+  font-weight: 300;
+}
+
+.jumbotron .container {
+  max-width: 40rem;
+}
+
+.problem-list-title {
+  text-align: center;
+  padding-bottom: 5px;
+}
+
+.flexbox {
+  display: flex;
+}
+
+.card {
+  box-sizing: border-box;
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+}
+
+.profile-icon {
+  padding-bottom: 10px;
+}
+
+.badge {
+  margin-bottom: 3px;
+}

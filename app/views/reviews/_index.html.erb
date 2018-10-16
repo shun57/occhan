@@ -1,14 +1,15 @@
+<h4>レビュー</h4>
 <ul>
   <% reviews.each do |review| %>
     <% if review.id.present? %>
       <li>
         <p>投稿者：<%= "#{review.user.name}" %></p>
-        <p>コメント：<%= review.review_content %></p>
+        <p><%= review.review_content %></p>
         <% if review.user == current_user %>
           <%= link_to 'レビューを削除する', problem_review_path(review.problem_id, review.id), method: :delete, remote: true %>
         <% end %>
-        <hr>
       </li>
+      <hr>
     <% end %>
   <% end %>
 </ul>

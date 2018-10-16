@@ -1,23 +1,36 @@
-<h1>Problems</h1>
-    <% @problems.each do |problem| %>
-      <h2>相談したいこと：<%= problem.title %></h2>
-      <p>アドバイスを聞くので<%= problem.return %>欲しいです！</p>
-      <% post_user = problem.user %>
-      <p>相談者：<%= post_user.try(:name) %></p>
+<section class="jumbotron">
+    <h3 class="display-5">「おっちゃん」とは？</h3>
+    <p>「おっちゃん」は若者の相談におっちゃんがアドバイスをできるサービスです。<br>昨今、少子高齢化の中で、「若い人」の希少価値が高まっています。<br>その反面、おっちゃんの「若者にアドバイスをしたいという需要は高まるばかり・・・。<br>そこで、若者にリターンをあげてまで、おっちゃんが好き放題アドバイスできる！というスタンスのサービス。それが「おっちゃん」です。</p>
+  </div>
+</section>
 
-      <tr>
-        <td><%= link_to 'Show', problem %></td>
-        <% unless current_user != post_user %>
-          <td><%= link_to 'Edit', edit_problem_path(problem) %></td>
-          <td><%= link_to 'Destroy', problem, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
-      </tr>
-    <% end %>
-<br>
-<% if current_user %>
-  <% if current_user.role == 'young' %>
-    <%= link_to 'New Problem', new_problem_path %>
-  <% end %>
-<% end %>
-<br>
-<%= paginate @problems %>
+<div class="container">
+  <h3 class="problem-list-title">課題一覧</h3>
+  <div class="row">
+    <% @problems.each do |problem| %>
+      <div class="col-md-4 flexbox">
+        <div class="card shadow-sm mb-4">
+          <div class="profile-icon">
+            <% post_user = problem.user %>
+              <%= image_tag "#{post_user.icon}", :size => '50x50', class:"rounded-circle" %>
+              <br><%= post_user.try(:name) %>
+            </div>
+            <span class="badge badge-success badge-pill">相談したいこと！</span>
+            <h3><%= problem.title %></h3>
+            <hr>
+            <p>アドバイスを聞くので<br>
+              <h4><%= problem.return %></h4><br>欲しいです！</p>
+            <hr>
+            <%= link_to 'もっと詳しく', problem, class:"btn btn-sm btn-success", style:"color:white;" %>
+            <br>
+            <div class="btn-group">
+              <% unless current_user != post_user %>
+                <%= link_to '編集', edit_problem_path(problem), class:"btn btn-sm btn-secondary" %>
+                <%= link_to '削除', problem, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-sm btn-secondary", style:"color:white;"%>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+  </div>
+  <%= paginate @problems %>

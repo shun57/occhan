@@ -12,9 +12,9 @@
   <% end %>
 
   <div class="actions">
-    <%= f.text_field :title %>
-    <%= f.text_field :return %>
-    <%= f.text_field :content %>
-    <%= f.submit %>
+    <%= f.text_field :title, label: "相談したいこと" %>
+    <%= f.text_field :return, label: "リターン設定(アドバイスを聞くので、〇〇欲しいです！)" %>
+    <%= f.text_field :content, label: "相談内容" %>
+    <%= f.submit "投稿", class:"btn btn-success" %>
   </div>
 <% end %>
