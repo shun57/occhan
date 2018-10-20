@@ -16,34 +16,26 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
-          <% if user_signed_in? %>
-            <li class="nav-item">
-              <a class="nav-link" href="/users/<%= current_user.id %>">マイページ</a>
-            </li>
-            <li class="nav-item">
-              <%= link_to "メッセージ一覧", conversations_path, class:"nav-link" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"nav-link" %>
-            </li>
-          <% else %>
-            <li class="nav-item">
-              <%= link_to "新規登録", new_user_registration_path, class:"nav-link" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "ログイン", new_user_session_path, class:"nav-link" %>
-            </li>
-          <% end %>
+          <li class="nav-item">
+            <%= link_to "マイページ", user_path(current_user.id), class:"nav-link" if user_signed_in? %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "メッセージ一覧", conversations_path,class:"nav-link" if user_signed_in? %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "ログアウト", destroy_user_session_path,class:"nav-link", method: :delete if user_signed_in? %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "新規登録", new_user_registration_path,class:"nav-link" unless user_signed_in? %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "ログイン", new_user_session_path,class:"nav-link" unless user_signed_in? %>
+          </li>
         </ul>
         <a class="nav-item">
-          <% if current_user %>
-            <% if current_user.role == 'young' %>
-              <%= link_to (fa_icon "edit", text: "課題投稿"), new_problem_path, class:"nav-link btn btn-outline-primary", style:"color:white;" %>
-            <% end %>
-          <% end %>
+            <%= link_to (fa_icon "edit", text: "課題投稿"), new_problem_path,class:"nav-link btn btn-outline-primary", style:"color:white;" if(user_signed_in? && current_user.role == 'young') %>
         </a>
       </div>
     </nav>
@@ -64,7 +56,9 @@
 
     <footer class="footer">
       <p>&copy; 2017-2018 Occhan, Inc.</p>
-      <p><a href="#">Back to top</a></p>
+      <p>
+        <a href="#">Back to top</a>
+      </p>
     </footer>
 
   </body>

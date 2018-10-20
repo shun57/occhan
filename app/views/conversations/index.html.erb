@@ -7,7 +7,7 @@
       <td>
         <% if conversation.target_user(current_user).present? %>
           メッセージ：<%= link_to conversation.target_user(current_user).name, conversation_messages_path(conversation), class:"btn btn-danger", style:"color:white;"%>
-          <%= link_to "(プロフィール)", user_path(conversation.target_user(current_user).id)%>
+          <%= link_to "プロフィール", user_path(conversation.target_user(current_user).id)%>
         <% end %>
       </td>
     <% end %>

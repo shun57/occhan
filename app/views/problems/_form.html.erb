@@ -1,20 +1,20 @@
 <%= bootstrap_form_for(@problem) do |f| %>
-  <% if @problem.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@problem.errors.count, "error") %> prohibited this problem from being saved:</h2>
-
-      <ul>
+<% if @problem.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@problem.errors.count, "件エラー") %>
+      このような問題があり、保存ができませんでした</h2>
+    <ul>
       <% @problem.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.text_field :title, label: "相談したいこと" %>
-    <%= f.text_field :return, label: "リターン設定(アドバイスを聞くので、〇〇欲しいです！)" %>
-    <%= f.text_field :content, label: "相談内容" %>
-    <%= f.submit "投稿", class:"btn btn-success" %>
+    </ul>
   </div>
+<% end %>
+
+<div class="actions">
+  <%= f.text_field :title, label: "相談したいこと" %>
+  <%= f.text_field :return, label: "リターン設定(アドバイスを聞くので、〇〇欲しいです！)" %>
+  <%= f.text_field :content, label: "相談内容" %>
+  <%= f.submit "投稿", class:"btn btn-success" %>
+</div>
 <% end %>

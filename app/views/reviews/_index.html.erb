@@ -1,15 +1,14 @@
-<h4>レビュー</h4>
+<ol class="breadcrumb">
+  <li class="breadcrumb-item active" aria-current="page">レビュー</li>
+</ol>
 <ul>
   <% reviews.each do |review| %>
     <% if review.id.present? %>
-      <li>
-        <p>投稿者：<%= "#{review.user.name}" %></p>
-        <p><%= review.review_content %></p>
-        <% if review.user == current_user %>
-          <%= link_to 'レビューを削除する', problem_review_path(review.problem_id, review.id), method: :delete, remote: true %>
-        <% end %>
-      </li>
-      <hr>
-    <% end %>
+      投稿者：<strong><%= link_to review.user.name, user_path(review.user) %></strong>
+      <p><%= review.review_content %></p>
+      <%= link_to '削除する', problem_review_path(review.problem_id, review.id), method: :delete, remote: true if(review.user == current_user) %>
+    </li>
+    <hr>
   <% end %>
+<% end %>
 </ul>

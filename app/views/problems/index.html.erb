@@ -1,7 +1,10 @@
 <section class="jumbotron">
-    <h3 class="display-5">「おっちゃん」とは？</h3>
-    <p>「おっちゃん」は若者の相談におっちゃんがアドバイスをできるサービスです。<br>昨今、少子高齢化の中で、「若い人」の希少価値が高まっています。<br>その反面、おっちゃんの「若者にアドバイスをしたいという需要は高まるばかり・・・。<br>そこで、若者にリターンをあげてまで、おっちゃんが好き放題アドバイスできる！というスタンスのサービス。それが「おっちゃん」です。</p>
-  </div>
+  <h3 class="display-5">「おっちゃん」とは？</h3>
+  <p>「おっちゃん」は若者の相談におっちゃんがアドバイスをできるサービスです。<br>
+    昨今、少子高齢化の中で、「若い人」の希少価値が高まっています。<br>
+    その反面、おっちゃんの「若者にアドバイスをしたいという需要は高まるばかり・・・。<br>
+    そこで、若者にリターンをあげてまで、おっちゃんが好き放題アドバイスできる！というスタンスのサービス。それが「おっちゃん」です。
+  </p>
 </section>
 
 <div class="container">
@@ -24,13 +27,12 @@
             <%= link_to 'もっと詳しく', problem, class:"btn btn-sm btn-success", style:"color:white;" %>
             <br>
             <div class="btn-group">
-              <% unless current_user != post_user %>
-                <%= link_to '編集', edit_problem_path(problem), class:"btn btn-sm btn-secondary" %>
-                <%= link_to '削除', problem, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-sm btn-secondary", style:"color:white;"%>
-              <% end %>
+              <%= link_to '編集', edit_problem_path(problem), class:"btn btn-sm btn-outline-success" unless(current_user != post_user) %>
+              <%= link_to '削除', problem, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-sm btn-outline-success" unless(current_user != post_user) %>
             </div>
           </div>
         </div>
       <% end %>
+    </div>
+    <%= paginate @problems %>
   </div>
-  <%= paginate @problems %>

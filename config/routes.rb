@@ -4,10 +4,10 @@ Rails.application.routes.draw do
     resources :reviews
   end
   devise_for :users
-  resources :users, :only => [:show]
-  resources :request_managements, only:[:create, :destroy]
+  resources :users, only: [:show]
+  resources :request_managements, only: %i[create destroy]
   resources :conversations do
     resources :messages
   end
-  mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  mount LetterOpenerWeb::Engine, at: '/letter_opener'
 end

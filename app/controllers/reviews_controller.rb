@@ -1,5 +1,4 @@
 class ReviewsController < ApplicationController
-
   def create
     @problem = Problem.find(params[:problem_id])
     @review = @problem.reviews.build(review_params)
@@ -8,16 +7,14 @@ class ReviewsController < ApplicationController
       if @review.save
         format.js { render :index }
       else
-        format.html { redirect_to problem_path(@problem), notice:'投稿できませんでした' }
+        format.html { redirect_to problem_path(@problem), notice: '投稿できませんでした' }
       end
     end
   end
 
   def destroy
     @review = Review.find(params[:id])
-    if @review.destroy
-      render :index
-    end
+    render :index if @review.destroy
   end
 
   private
@@ -25,5 +22,4 @@ class ReviewsController < ApplicationController
   def review_params
     params.require(:review).permit(:review_content, :problem_id, :user_id)
   end
-
 end

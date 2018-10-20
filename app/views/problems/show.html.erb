@@ -3,48 +3,40 @@
     <% post_user = @problem.user %>
       <%= image_tag "#{post_user.icon}", :size => '50x50', class:"rounded-circle" %>
       <br><%= post_user.try(:name) %>
-    </div>
-    <span class="badge badge-success badge-pill">相談したいこと！</span>
-    <h3><%= @problem.title %></h3>
-    <hr>
-    <p>アドバイスを聞くので<br>
-      <h4><%= @problem.return %></h4><br>欲しいです！</p>
-    <hr>
-    <p><%= @problem.content %></p>
-    <hr>
-    <% unless @problem.user_id == current_user.id || current_user.role == 'young' %>
-      <% if @request.present? %>
-        <%= link_to '申請を解除する', request_management_path(id: @request.id), method: :delete, class: 'btn btn-danger' %>
-        <%= link_to 'メッセージを送る', conversations_path(sender_id: current_user.id, recipient_id: @problem.user.id), method: :post, class: 'btn btn-info'%>
-      <% else %>
-        <%= link_to '申請する', request_managements_path(problem_id: @problem.id), method: :post, class: 'btn btn-primary', style:"color:white;" %>
-      <% end %>
-    <% end %>
-    <br>
-    <div class="btn-group">
-      <% if @problem.user_id == current_user.id %>
-        <%= link_to 'Edit', edit_problem_path(@problem), class:"btn btn-sm btn-secondary" %>
-      <% end %>
-      <%= link_to 'Back', problems_path, class:"btn btn-sm btn-secondary", style:"color:white;" %>
-    </div>
   </div>
-  <br>
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item active" aria-current="page">相談者情報</li>
-  </ol>
-  <div class="media">
-    <%= image_tag "#{@problem.user.icon}", class:"mr-3" %>
-    <div class="media-body">
-      <h5 class="mt-0"><%= @problem.user.name %></h5>
-      <%= @problem.user.profile %>
-      <br>居住地：<%= @problem.user.prefecture_code %>
-    </div>
-    <p class="d-inline p-2 bg-primary text-white"><%= @problem.user.role %></p>
-  </div>
+  <span class="badge badge-success badge-pill">相談したいこと！</span>
+  <h3><%= @problem.title %></h3>
   <hr>
-  <div id="reviews_area">
-    <%= render partial: 'reviews/index', locals: { reviews: @reviews, problem: @problem } %>
-  </div>
-  <% if @problem.user_id != current_user.id %>
-    <%= render partial: 'reviews/form', locals: { review: @review, problem: @problem } %>
+  <p>アドバイスを聞くので<br>
+    <h4><%= @problem.return %></h4><br>欲しいです！</p>
+  <hr>
+  <p><%= @problem.content %></p>
+  <hr>
+  <% unless @problem.user_id == current_user.id || current_user.role == 'young' %>
+      <%= link_to '申請を解除する', request_management_path(id: @request.id), method: :delete, class: 'btn btn-danger' if @request.present? %>
+      <%= link_to 'メッセージを送る', conversations_path(sender_id: current_user.id, recipient_id: @problem.user.id), method: :post, class: 'btn btn-info' if @request.present?%>
+      <%= link_to '申請する', request_managements_path(problem_id: @problem.id), method: :post, class: 'btn btn-primary', style:"color:white;" unless @request.present? %>
   <% end %>
+  <br>
+  <div class="btn-group">
+    <%= link_to '編集', edit_problem_path(@problem), class:"btn btn-sm btn-outline-success" if(@problem.user_id == current_user.id) %>
+    <%= link_to '戻る', problems_path, class:"btn btn-sm btn-outline-success" %>
+  </div>
+</div>
+<br>
+<ol class="breadcrumb">
+  <li class="breadcrumb-item active" aria-current="page">相談者情報</li>
+</ol>
+<div class="media">
+  <%= image_tag "#{@problem.user.icon}", class:"mr-3" %>
+  <div class="media-body">
+    <h5 class="mt-0"><%= @problem.user.name %></h5>
+    <%= @problem.user.profile %>
+    <br>居住地：<%= @problem.user.prefecture_code %>
+  </div>
+  <p class="d-inline p-2 bg-primary text-white"><%= @problem.user.role %></p>
+</div>
+<div id="reviews_area">
+  <%= render partial: 'reviews/index', locals: { reviews: @reviews, problem: @problem } %>
+</div>
+  <%= render partial: 'reviews/form', locals: { review: @review, problem: @problem } if(@problem.user_id != current_user.id) %>
