@@ -21,8 +21,8 @@
             <span class="badge badge-success badge-pill">相談したいこと！</span>
             <h3><%= problem.title %></h3>
             <hr>
-            <p>アドバイスを聞くので<br>
-              <h4><%= problem.return %></h4><br>欲しいです！</p>
+            <p>アドバイスを聞くので<br><h4><%= problem.return %></h4><br>欲しいです！</p>
+            <small>作成：<%= simple_time(problem[:created_at]) %></small>
             <hr>
             <%= link_to 'もっと詳しく', problem, class:"btn btn-sm btn-success", style:"color:white;" %>
             <br>
