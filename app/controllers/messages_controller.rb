@@ -1,4 +1,6 @@
 class MessagesController < ApplicationController
+  before_action :authenticate_user!
+  before_action :ensure_correct_user
   before_action do
     @conversation = Conversation.find(params[:conversation_id])
   end
@@ -14,12 +16,6 @@ class MessagesController < ApplicationController
     if params[:m]
       @over_ten = false
       @messages = @conversation.messages
-    end
-
-    if @messages.last
-      if @messages.last.user_id != current_user.id
-        @messages.last.read = true
-      end
     end
 
     @message = @conversation.messages.build
@@ -40,4 +36,9 @@ class MessagesController < ApplicationController
     params.require(:message).permit(:content, :user_id)
   end
 
+  def ensure_correct_user
+    if request.referer == nil
+      redirect_to problems_path, notice: 'アクセスできません'
+    end
+  end
 end

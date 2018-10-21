@@ -1,5 +1,5 @@
 <% if @over_ten %>
-  <%= link_to '以前のメッセージ', '?m=all' %>
+  <%= link_to '以前のメッセージを見る', '?m=all',class:"btn btn-sm btn-outline-primary" %>
 <% end %>
 
 <div class="ui segment">
@@ -30,7 +30,7 @@
 
   <%= form_with(model: [@conversation, @message]) do |f| %>
   <div class="field">
-    <%= f.text_area :content, class: "form-control" %>
+    <%= f.text_area :content, class: "form-control", placeholder: 'Send a messsage' %>
   </div>
   <%= f.text_field :user_id, value: current_user.id, type: "hidden" %>
   <div>
