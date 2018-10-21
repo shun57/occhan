@@ -4,7 +4,7 @@ class ProblemsController < ApplicationController
 
   def index
     @problems = Problem.all
-    @problem_pages = Problem.page(params[:page]).per(10)
+    @problems = Problem.page(params[:page]).per(10)
   end
 
   def show
