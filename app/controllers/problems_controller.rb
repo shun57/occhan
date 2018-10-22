@@ -20,8 +20,7 @@ class ProblemsController < ApplicationController
   def edit; end
 
   def create
-    @problem = Problem.new(problem_params)
-    @problem.user_id = current_user.id
+    @problem = current_user.problems.build(problem_params)
 
     if @problem.save
       redirect_to @problem, notice: '相談を作成しました！'
@@ -31,11 +30,11 @@ class ProblemsController < ApplicationController
   end
 
   def update
-      if @problem.update(problem_params)
-        redirect_to @problem, notice: '相談内容を更新しました！'
-      else
-        render :edit
-      end
+    if @problem.update(problem_params)
+      redirect_to @problem, notice: '相談内容を更新しました！'
+    else
+      render :edit
+    end
   end
 
   def destroy

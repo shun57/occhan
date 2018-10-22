@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  #:confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  #:lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
 
@@ -8,10 +8,7 @@ class User < ApplicationRecord
   has_many :request_managements, dependent: :destroy
   has_many :request_management_problems, through: :request_managements, source: :problem
 
-  validates :name, presence: true
-  validates :role, presence: true
-  validates :prefecture_code, presence: true
-  validates :profile, presence: true
+  validates_presence_of :name, :role, :prefecture_code, :profile
 
   mount_uploader :icon, ImageUploader
 

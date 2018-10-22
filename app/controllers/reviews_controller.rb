@@ -3,6 +3,7 @@ class ReviewsController < ApplicationController
     @problem = Problem.find(params[:problem_id])
     @review = @problem.reviews.build(review_params)
     @review.user_id = current_user.id
+
     respond_to do |format|
       if @review.save
         format.js { render :index }

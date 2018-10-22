@@ -1,9 +1,7 @@
 class MessagesController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_correct_user
-  before_action do
-    @conversation = Conversation.find(params[:conversation_id])
-  end
+  before_action :set_conversation
 
   def index
     @messages = @conversation.messages
@@ -23,6 +21,7 @@ class MessagesController < ApplicationController
 
   def create
     @message = @conversation.messages.build(message_params)
+
     if @message.save
       redirect_to conversation_messages_path(@conversation)
     else
@@ -37,8 +36,10 @@ class MessagesController < ApplicationController
   end
 
   def ensure_correct_user
-    if request.referer == nil
-      redirect_to problems_path, notice: 'アクセスできません'
-    end
+    redirect_to problems_path, notice: 'アクセスできません' if request.referer.blank?
+  end
+
+  def set_conversation
+    @conversation = Conversation.find(params[:conversation_id])
   end
 end
