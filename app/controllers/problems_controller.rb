@@ -1,6 +1,7 @@
 class ProblemsController < ApplicationController
-  before_action :set_problem, only: %i[show edit update destroy]
   before_action :authenticate_user!, only: %i[new show edit update destroy]
+  before_action :set_problem, only: %i[show edit update destroy]
+  before_action :correct_user, only: %i[edit update]
 
   def index
     @problems = Problem.all
@@ -50,5 +51,9 @@ class ProblemsController < ApplicationController
 
   def problem_params
     params.fetch(:problem, {}).permit(:title, :content, :return)
+  end
+
+  def correct_user
+    redirect_to problems_path, notice: 'アクセスできません！' unless current_user.problems.find_by(id: params[:id])
   end
 end
