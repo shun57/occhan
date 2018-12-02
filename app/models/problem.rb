@@ -5,4 +5,7 @@ class Problem < ApplicationRecord
   has_many :request_management_users, through: :request_managements, source: :user
 
   validates_presence_of :title, :content, :return
+
+  scope :recent, -> { per(10).order('created_at DESC') }
+
 end

@@ -5,7 +5,7 @@ class ProblemsController < ApplicationController
 
   def index
     @problems = Problem.all
-    @problems = Problem.page(params[:page]).per(10).order('created_at DESC')
+    @problems = Problem.page(params[:page]).recent
   end
 
   def show
