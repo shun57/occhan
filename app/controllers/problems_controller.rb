@@ -21,7 +21,7 @@ class ProblemsController < ApplicationController
   def edit; end
 
   def create
-    @problem = current_user.problems.build(problem_params)
+    @current_user_problem = current_user.problems.build(problem_params)
 
     if @problem.save
       redirect_to @problem, notice: '相談を作成しました！'
