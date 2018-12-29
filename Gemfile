@@ -23,6 +23,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 # Upload
 gem 'carrierwave'
+gem 'fog'
 gem 'mini_magick'
 
 # Login
