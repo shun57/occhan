@@ -5,6 +5,7 @@ require 'carrierwave/storage/fog'
 if Rails.env.production?
   CarrierWave.configure do |config|
     config.cache_storage = :fog
+    config.cache_dir = "#{Rails.root}/tmp/uploads"
     config.fog_provider = 'fog/aws'
 
     config.fog_credentials = {
@@ -14,8 +15,8 @@ if Rails.env.production?
       region: ENV['S3_REGION']
     }
 
-    config.fog_directory  = 'rails-photo-saku'
+    config.fog_directory  = ENV['S3_BUCKET']
     config.asset_host = "https://s3.ap-northeast-1.amazonaws.com/rails-photo-saku"
-
+    CarrierWave::SanitizedFile.sanitize_regexp = /[^[:word:]\.\-\+]/
   end
 end
