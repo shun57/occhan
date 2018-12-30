@@ -23,8 +23,8 @@ class ProblemsController < ApplicationController
   def create
     @current_user_problem = current_user.problems.build(problem_params)
 
-    if @problem.save
-      redirect_to @problem, notice: '相談を作成しました！'
+    if @current_user_problem.save
+      redirect_to @current_user_problem, notice: '相談を作成しました！'
     else
       render :new
     end
