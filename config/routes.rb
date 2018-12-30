@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'problems#index'
+  root 'about#index'
   resources :problems do
     resources :reviews
   end
