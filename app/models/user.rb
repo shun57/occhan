@@ -10,6 +10,8 @@ class User < ApplicationRecord
 
   validates_presence_of :name, :role, :prefecture_code, :profile
 
+  has_one_attached :icon
+
   mount_uploader :icon, ImageUploader
 
   enum role: { guest: 0, young: 1, occhan: 2 }
